@@ -39,7 +39,12 @@ export const StakeRewards = () => {
     return (
         <div style={{ width: "100%", margin: "20px 0", display: "flex", flexDirection: "column" }}>
             {!isTokenBalanceLoading && (
-                <p>Wallet Balance: {toEther(BigInt(tokenBalance!.toString()))}</p>
+                <p>
+                Wallet Balance: 
+                {!isTokenBalanceLoading && tokenBalance !== undefined
+                  ? toEther(BigInt(tokenBalance.toString()))
+                  : "Loading..."}
+              </p>
             )}
             <h2 style={{ marginBottom: "20px"}}>Stake Rewards: {stakedInfo && toEther(BigInt(stakedInfo[1].toString()))}</h2>
             <TransactionButton

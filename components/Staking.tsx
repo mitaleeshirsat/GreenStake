@@ -27,7 +27,7 @@ export const Staking = () => {
             start: 0,
             count: parseInt(totalNFTSupply.toString()),
         });
-        
+        console.log(nfts)
         for (let nft of nfts) {
             const owner = await ownerOf({
                 contract: NFT_CONTRACT,
