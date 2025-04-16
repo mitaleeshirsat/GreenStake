@@ -14,12 +14,27 @@ type OwnedNFTsProps = {
 export const NFTCard = ({ nft, refetchOwnedNFTs, refetchStakedInfo }: OwnedNFTsProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isApproved, setIsApproved] = useState(false);
+    const convertIpfsToHttp = (uri: string) => {
+        if (uri.startsWith("ipfs://")) {
+          const cid = uri.split("ipfs://")[1];
+          // Default to IPFS.io — you can change to another gateway
+          return `https://ipfs.io/ipfs/${cid}`;
+        }
+        return uri;
+      };
+      const handleConvert = async(ipfsUri:string): Promise<string> => {
+        const convertedUrl = convertIpfsToHttp(ipfsUri);
+        const response= await fetch(convertedUrl)
+        const json_data= await response.json()
 
+        return json_data.image;
+      };
+      console.log(nft)
     return (
         <div style={{ margin: "10px" }}>
             <MediaRenderer
                 client={client}
-                src={nft.metadata.image}
+                src="https://ipfs.io/ipfs/QmXH1dWDaiHRxxJa6xrKdtog9jEqsSxofi5XkFnA44Lq4a/0.jpg"
                 style={{
                     borderRadius: "10px",
                     marginBottom: "10px",
@@ -76,7 +91,7 @@ export const NFTCard = ({ nft, refetchOwnedNFTs, refetchStakedInfo }: OwnedNFTsP
                                 }}
                             >Close</button>
                         </div>
-                        <h3 style={{ margin: "10px 0" }}>You about to stake:</h3>
+                        <h3 style={{ margin: "10px 0" }}>You are about to stake:</h3>
                         <MediaRenderer
                             client={client}
                             src={nft.metadata.image}

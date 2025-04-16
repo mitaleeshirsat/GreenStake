@@ -1,7 +1,3 @@
-// import { defineChain } from "thirdweb";
-// import { baseSepolia } from "thirdweb/chains";
-// export const chain = defineChain( baseSepolia );
-
 import { defineChain } from "thirdweb";
 
 export const chain = defineChain({
@@ -12,13 +8,13 @@ export const chain = defineChain({
     symbol: "ETH",
     decimals: 18,
   },
-  rpc: "https://rpc.ankr.com/base_sepolia", // Make sure this is a valid RPC
+  // Change this line to use a different RPC endpoint
+  rpc: "https://sepolia.base.org", // Base Sepolia public RPC
   blockExplorers: [
     {
       name: "Basescan",
       url: "https://sepolia.basescan.org",
     },
-  ], // ✅ Now it's an array
+  ],
   testnet: true,
 });
-
